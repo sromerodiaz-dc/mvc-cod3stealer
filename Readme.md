@@ -1,9 +1,20 @@
-# Arquitectura MVC
+# >Tarea: arquitectura MVC
 
-Aplicación que trabaja con objetos coches, modifica la velocidad y la muestra
+Tarea para implementar arquitectura MVC
+
+Utiliza objetos coches, modifica la velocidad y la muestra
 
 ---
-## Diagrama de clases:
+
+## Clases ```Controller``` y ```Model```
+
+- Implementa la clase ```Controller``` y ```Model``` según el diagrama de clases.
+
+- Implementa los métodos ```crearCoche()```, ```getCoche()```, ```cambiarVelocidad()``` y ```getVelocidad()```
+
+- Realiza los test necesarios para comprobar que funcionan correctamente
+
+### Diagrama de clases:
 
 ```mermaid
 classDiagram
@@ -31,7 +42,7 @@ classDiagram
 
 ---
 
-## Diagrama de Secuencia
+### Diagrama de Secuencia
 
 Ejemplo básico del procedimiento, sin utilizar los nombres de los métodos
 
