@@ -1,4 +1,4 @@
-# >Tarea: arquitectura MVC
+# Tarea: arquitectura MVC
 
 Tarea para implementar arquitectura MVC
 
