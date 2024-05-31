@@ -1,24 +1,25 @@
 package cod.mvc;
 
+/**
+ * @author Santiago Agustin Romero Diaz
+ * 5/31/2024 - Examen COD 3ª evaluación
+ * Clase Main, punto de entrada del programa.
+ */
 public class Main {
+    /**
+     * Método main, punto de entrada del programa.
+     * @param args Argumentos de línea de comandos
+     */
     public static void main(String[] args) {
-        // Inicializamos la app
-        // obtenemos la instancia única del modelo
-        Model miModel = Model.getInstance();
-        // instanciamos el controlador
-        // le pasamos el Model instanciado
-        Controller miController = new Controller(miModel);
+        Model model = Model.getInstance(); // Obtiene la única instancia del modelo
+        Controller controller = new Controller(model);
 
-        // Crear tres coches
-        miController.crearCoche("BMW", "SPQ 5432");
-        miController.crearCoche("Audi", "JFK 9876");
-        miController.crearCoche("Mercedes", "MNO 8546");
+        // Crea un coche y cambia su velocidad
+        controller.crearCoche("Maserati brutal", "SPQUWU77");
+        controller.cambiarVelocidad("SPQUWU77", 120);
 
-        // Cambiar la velocidad de un coche
-        miController.cambiarVelocidad("SPQ 5432", 50);
-
-        // otro cambio de velocidad
-        // sobrepasando la velocidad máxima
-        miController.cambiarVelocidad("JFK 9876", 140);
+        // Crea otro coche y cambia su velocidad
+        controller.crearCoche("reanultclio", "7955BRP");
+        controller.cambiarVelocidad("7955BRP", 220);
     }
 }
