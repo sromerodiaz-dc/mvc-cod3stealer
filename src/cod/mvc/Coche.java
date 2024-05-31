@@ -16,6 +16,12 @@ public class Coche {
         this.velocidad = 0;
     }
 
+    public Coche(String modelo, String matricula, int velocidad) {
+        this.modelo = modelo;
+        this.matricula = matricula;
+        this.velocidad = 0;
+    }
+
     public String getMatricula() {
         return matricula;
     }
