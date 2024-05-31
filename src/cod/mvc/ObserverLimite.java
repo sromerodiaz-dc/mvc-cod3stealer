@@ -1,22 +1,28 @@
 package cod.mvc;
 
 /**
- * Otro observador que se suscribe a los cambios de velocidad de un coche
+ * Clase que implementa el patrón de diseño Observer para detectar cuando un coche excede el límite de velocidad.
  */
 public class ObserverLimite implements Observer {
-    // velocidad máxima
+    // Velocidad máxima permitida
     final static int LIMITE = 120;
+
     /**
-     * Este es el observador de limite de velocidad
+     * Método que se ejecutará cuando el objeto observado cambie.
+     * -
+     * Verifica si el coche ha excedido el límite de velocidad.
+     * Si el coche ha excedido el límite, se mostrará un mensaje de "INFRACCION"
+     * y se reducirá la velocidad del coche en 10 km/h para evitar una infracción.
+     *
      * @param coche Coche al que se le actualizó la velocidad
+     * @param model Modelo que se utiliza para actualizar la velocidad del coche
      */
     @Override
     public void update(Coche coche, Model model) {
-        if(coche.velocidad>LIMITE){
-            System.out.println("INFRACCION"+
+        if (coche.velocidad > LIMITE) {
+            System.out.println("INFRACCION" +
                     "\nSe ha reducido la velocidad");
-            model.cambiarVelocidad(coche.matricula, coche.velocidad-10);
-
+            model.cambiarVelocidad(coche.matricula, coche.velocidad - 10);
         }
     }
 }

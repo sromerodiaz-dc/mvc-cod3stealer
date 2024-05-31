@@ -1,49 +1,54 @@
 package cod.mvc;
 
-public class Controller{
-
-    // definimos la instancia del modelo
-    // private final Model miModel;
+/**
+ * Clase Controller, la cual gestiona la lógica de control del programa.
+ * Implementa el patrón Observer para actualizar a los observadores cuando se crea un coche o
+ * cambia su velocidad.
+ */
+public class Controller {
+    Model model; // Modelo del programa
 
     /**
-     * Constructor. Inicializamos el controller
-     * Creamos los observadores que necesitamos
-     * @param miModel
+     Constructor de la clase Controller, inicializa el modelo y añade y elimina observadores.
+     @param model Modelo del programa
      */
-    Model miModel;
+    public Controller(Model model) {
+        this.model = model;
 
-    public Controller(Model miModel){
-        this.miModel = miModel;
-
-        // instanciamos al observador de la velocidad
-        ObserverVelocidad observoVelocidad = new ObserverVelocidad();
-        miModel.addObserver(observoVelocidad);
-
-        // instanciamos un segundo observador para el limite de velocidad
-        ObserverLimite observoLimite = new ObserverLimite();
-        miModel.addObserver(observoLimite);
+        // Añade y elimina observadores de velocidad y límite
+        ObserverVelocidad velocidad = new ObserverVelocidad();
+        model.addObserver(velocidad);
+        model.notifyAll();
+        ObserverLimite limit = new ObserverLimite();
+        model.addObserver(limit);
+        model.notifyAll();
+        model.removeObserver(limit);
+        model.notifyAll();
     }
 
     /**
-     * Crea un coche
-     * @param nombre del coche
-     * @param matricula del coche
+     * Método que crea un coche con el nombre y matrícula especificados.
+     * @param nombre Nombre del coche
+     * @param matricula Matrícula del coche
      */
-    public void crearCoche(String nombre, String matricula){
-        miModel.crearCoche(nombre, matricula, 100);
+    public void crearCoche(String nombre, String matricula) {
+        model.crearCoche(nombre, matricula, 100);
     }
 
     /**
-     * Cambia la velocidad de un coche
-     * @param matricula del coche
-     * @param velocidad nueva
+     * Método que cambia la velocidad del coche con la matrícula especificada.
+     * @param matricula Matrícula del coche
+     * @param velocidad Nueva velocidad del coche
      */
-    public void cambiarVelocidad(String matricula, Integer velocidad){
-        miModel.cambiarVelocidad(matricula, velocidad);
+    public void cambiarVelocidad(String matricula, Integer velocidad) {
+        model.cambiarVelocidad(matricula, velocidad);
     }
 
-
-
-
-
+    /**
+     * Método de busqueda de vehículos dados de alta, es decir, existentes en el garaje / parking
+     * @param matricula Matricula del coche
+     * */
+    public void buscarCoche(String matricula) {
+        model.muestraDatos(matricula);
+    }
 }

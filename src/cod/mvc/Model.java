@@ -3,41 +3,55 @@ package cod.mvc;
 import java.util.ArrayList;
 
 /**
- * Vamos a usar la interface Observable
- * El Model será el encargado de notificar a los observadores
+ * Clase Model, representa el modelo de la aplicación.
+ * Implementa la interfaz Observable.
  */
 public class Model implements Observable {
-    // array de coches
-    static ArrayList<Coche> parking = new ArrayList<>();
+    /**
+     * Instancia única del modelo.
+     */
+    private static Model instance = new Model();
 
-    // para los observadores
-    private static final ArrayList<Observer> observers = new ArrayList<Observer>();
+    /**
+     * ArrayList de coches en el parking.
+     */
+    private final ArrayList<Coche> parking;
 
-    // creo una instancia única de la clase
-    private static final Model instance = new Model();
+    /**
+     * ArrayList de observadores.
+     */
+    private final ArrayList<Observer> observers;
 
-    // Constructor privado para evitar instanciación externa
-    Model() {}
+    /**
+     * Constructor privado para evitar instanciación externa.
+     */
+    private Model() {
+        parking = new ArrayList<>();
+        observers = new ArrayList<>();
+    }
 
-    // Método para obtener la única instancia de la clase
+    /**
+     * Obtiene la única instancia del modelo.
+     * @return instancia única del modelo
+     */
     public static Model getInstance() {
+        if (instance == null) {
+            instance = new Model();
+        }
         return instance;
     }
 
+    // Implementación de la interfaz Observable
     @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
+
     @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
-    /**
-     * Notifica a los observadores
-     * Se ejecutara el método update() de cada observador
-     * @param coche
-     */
     @Override
     public void notifyObservers(Coche coche, Model model) {
         for (Observer observer : observers) {
@@ -46,56 +60,68 @@ public class Model implements Observable {
     }
 
     /**
-     * Crea un coche y lo mete en el parking
-     *
+     * Crea un coche y lo añade al parking.
      * @param modelo    del coche
-     * @param matricula identificador unico
-     * @param i
+     * @param matricula identificador único
+     * @param velocidad velocidad del coche
      * @return el coche creado
      */
-    public Coche crearCoche(String modelo, String matricula, int i){
-        Coche aux = new Coche(modelo, matricula);
+    public Coche crearCoche(String modelo, String matricula, int velocidad) {
+        Coche aux = new Coche(modelo, matricula, velocidad);
         parking.add(aux);
         return aux;
     }
 
     /**
-     * Busca coche segun matricula
+     * Busca un coche en el parking según la matrícula.
      * @param matricula a buscar
      * @return coche o null si no existe
      */
-    public Coche getCoche(String matricula){
-        Coche aux = null;
-        // recorre el array buscando por matricula
-        for (Coche e: parking) {
+    public Coche getCoche(String matricula) {
+        for (Coche e : parking) {
             if (e.matricula.equals(matricula)) {
-                aux = e;
+                return e;
             }
         }
-        return aux;
+        return null;
     }
 
     /**
-     * Método que cambia la velocidad, por lo tanto
-     * tendrá que avisar al controlador que ha cambiado
-     *
+     * Busca un coche en el parking, es empleado por el controller para encontrar vehículos dados de alta.
+     * @param matricula MAtrícula del coche.
+     * */
+    public void muestraDatos(String matricula) {
+        int contador = 0; // Comprueba si existe o no
+        for (Coche e : parking) {
+            if (e.matricula.equals(matricula)) {
+                contador++;
+                View.muestraDatos(e.matricula, e.velocidad,contador); // Llama al View para mostrar datos por pantalla
+                break;
+            }
+        }
+        if (contador == 0) View.muestraDatos(null, null, contador); // Si no existe, llama al View para mostrar el fallo de busqueda
+    }
+
+    /**
+     * Cambia la velocidad de un coche y notifica a los observadores.
      * @param matricula identificador del coche
      * @param v nueva velocidad
      */
-    public void cambiarVelocidad(String matricula, Integer v) {
-        // busca el coche
-        getCoche(matricula).velocidad = v;
-
-        // lo notificamos a todos los observadores
-        notifyObservers(getCoche(matricula), this);
+    public void cambiarVelocidad(String matricula, int v) {
+        Coche coche = getCoche(matricula);
+        if (coche != null) {
+            coche.velocidad = v;
+            notifyObservers(coche, this);
+        }
     }
 
     /**
-     * Devuelve la velocidad según la matrícula
+     * Devuelve la velocidad de un coche según la matrícula.
      * @param matricula identificador del coche
      * @return velocidad del coche actual
      */
-    public Integer getVelocidad(String matricula) {
-        return getCoche(matricula).velocidad;
+    public int getVelocidad(String matricula) {
+        Coche coche = getCoche(matricula);
+        return coche != null ? coche.velocidad : -1;
     }
 }

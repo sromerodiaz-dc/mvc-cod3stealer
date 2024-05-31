@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ModelTest {
 
-    Model model = new Model();
+    Model model = Model.getInstance();
     @BeforeEach
     void setUp() {
         model.crearCoche("1234ABC", "ModeloTest1", 100);

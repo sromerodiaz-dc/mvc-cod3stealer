@@ -12,11 +12,8 @@ public class ViewTest {
     public void testMuestraVelocidad() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-
-        View.muestraVelocidad("9876WXZ", 150);
-
-        String expectedOutput = "El coche con matrícula 9876WXZ tiene una velocidad de 150 km/h\n";
-
+        View.muestraVelocidad("7955BRP", 70);
+        String expectedOutput = "El coche con matrícula 7955BRP-velocidad de 70 km/h\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 }
