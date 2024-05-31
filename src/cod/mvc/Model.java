@@ -78,13 +78,28 @@ public class Model implements Observable {
      * @return coche o null si no existe
      */
     public Coche getCoche(String matricula) {
-        Coche aux = null;
         for (Coche e : parking) {
             if (e.matricula.equals(matricula)) {
-                aux = e;
+                return e;
             }
         }
-        return aux;
+        return null;
+    }
+
+    /**
+     * Busca un coche en el parking, es empleado por el controller para encontrar vehículos dados de alta.
+     * @param matricula MAtrícula del coche.
+     * */
+    public void muestraDatos(String matricula) {
+        int contador = 0; // Comprueba si existe o no
+        for (Coche e : parking) {
+            if (e.matricula.equals(matricula)) {
+                contador++;
+                View.muestraDatos(e.matricula, e.velocidad,contador); // Llama al View para mostrar datos por pantalla
+                break;
+            }
+        }
+        View.muestraDatos(null, null, contador); // Si no existe, llama al View para mostrar el fallo de busqueda
     }
 
     /**
