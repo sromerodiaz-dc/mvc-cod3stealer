@@ -99,7 +99,7 @@ public class Model implements Observable {
                 break;
             }
         }
-        View.muestraDatos(null, null, contador); // Si no existe, llama al View para mostrar el fallo de busqueda
+        if (contador == 0) View.muestraDatos(null, null, contador); // Si no existe, llama al View para mostrar el fallo de busqueda
     }
 
     /**
