@@ -15,12 +15,12 @@ public class Model implements Observable {
     /**
      * ArrayList de coches en el parking.
      */
-    private ArrayList<Coche> parking;
+    private final ArrayList<Coche> parking;
 
     /**
      * ArrayList de observadores.
      */
-    private ArrayList<Observer> observers;
+    private final ArrayList<Observer> observers;
 
     /**
      * Constructor privado para evitar instanciación externa.
