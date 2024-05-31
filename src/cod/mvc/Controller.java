@@ -43,4 +43,12 @@ public class Controller {
     public void cambiarVelocidad(String matricula, Integer velocidad) {
         model.cambiarVelocidad(matricula, velocidad);
     }
+
+    /**
+     * Método de busqueda de vehículos dados de alta, es decir, existentes en el garaje / parking
+     * @param matricula Matricula del coche
+     * */
+    public void buscarCoche(String matricula) {
+        model.muestraDatos(matricula);
+    }
 }
