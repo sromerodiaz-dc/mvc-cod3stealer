@@ -21,5 +21,10 @@ public class Main {
         // Crea otro coche y cambia su velocidad
         controller.crearCoche("reanultclio", "7955BRP");
         controller.cambiarVelocidad("7955BRP", 220);
+
+        // Crear coche y recibir datos
+        controller.crearCoche("Miata Classic", "8888 PRR");
+        controller.buscarCoche("8888 PRR");
+        controller.buscarCoche("no existe");
     }
 }
