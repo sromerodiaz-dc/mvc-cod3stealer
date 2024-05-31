@@ -1,7 +1,7 @@
 package cod.mvc;
 
 /**
- * Observador de límite de velocidad.
+ * Clase que implementa el patrón de diseño Observer para detectar cuando un coche excede el límite de velocidad.
  */
 public class ObserverLimite implements Observer {
     // Velocidad máxima permitida
@@ -9,10 +9,13 @@ public class ObserverLimite implements Observer {
 
     /**
      * Método que se ejecutará cuando el objeto observado cambie.
-     * En este caso, se verifica si el coche ha excedido el límite de velocidad.
+     * -
+     * Verifica si el coche ha excedido el límite de velocidad.
      * Si el coche ha excedido el límite, se mostrará un mensaje de "INFRACCION"
-     * y se reducirá la velocidad del coche en 10 km/h.
+     * y se reducirá la velocidad del coche en 10 km/h para evitar una infracción.
+     *
      * @param coche Coche al que se le actualizó la velocidad
+     * @param model Modelo que se utiliza para actualizar la velocidad del coche
      */
     @Override
     public void update(Coche coche, Model model) {
