@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ModelTest {
 
@@ -33,9 +32,19 @@ class ModelTest {
         assertEquals("1234ABC", coche.getMatricula());
     }
 
+    // Nuevos TEST
     @Test
-    void testCambiarVelocidad() {
-        model.cambiarVelocidad("1234ABC", 150);
+    void testSubirVelocidad() {
+        model.subirVelocidad("1234ABC", 5); // Sube velocidad
+        Integer velocidad = model.getVelocidad("1234ABC"); // Guarda nueva velocidad
+        assertEquals(Optional.of(105),velocidad); // Comprueba nueva velocidad
+    }
+
+    @Test
+    void testBajarVelocidad() {
+        model.subirVelocidad("1234ABC", 5); // Sube velocidad
+        Integer velocidad = model.getVelocidad("1234ABC"); // Guarda nueva velocidad
+        assertEquals(Optional.of(100),velocidad); // Comprueba nueva velocidad
     }
 
     @Test
