@@ -76,15 +76,19 @@ public class Model implements Observable {
     }
 
     /**
-     * Método que cambia la velocidad, por lo tanto
-     * tendrá que avisar al controlador que ha cambiado
-     *
-     * @param matricula identificador del coche
-     * @param v nueva velocidad
+     * Métodos que cambian la velocidad.
      */
-    public void cambiarVelocidad(String matricula, Integer v) {
-        // busca el coche
-        getCoche(matricula).velocidad = v;
+    public void subirVelocidad(String matricula, Integer v) {
+        // busca el coche y le SUMA la velocidad
+        getCoche(matricula).velocidad -= v;
+
+        // lo notificamos a todos los observadores
+        notifyObservers(getCoche(matricula), this);
+    }
+
+    public void bajarVelocidad(String matricula, Integer v) {
+        // busca el coche y le SUMA la velocidad
+        getCoche(matricula).velocidad += v;
 
         // lo notificamos a todos los observadores
         notifyObservers(getCoche(matricula), this);
