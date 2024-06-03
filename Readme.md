@@ -14,10 +14,13 @@ Utiliza objetos coches, modifica la velocidad y la muestra
 
 - Realiza los test necesarios para comprobar que funcionan correctamente
 
-## NUEVO DIAGRAMA DE SECUENCIA
+## NUEVOS DIAGRAMAS
+Para crear estos diagramas he empleado UML con ayuda de los diagramas creados anteriormente y luego he pasado el código
+UML a MD para el correcto formateo de este documento. El código UML es como el MD y se emplea para hacer diagramas,
+es más sencillo y rápido que hacerlo desde `draw.io` porque no se hace todo a mano, solo hay que tener el código UML
+bien hecho y el gráfico se genera solo.
 
-# Diagrama de secuencia
-
+### NUEVO DIAGRAMA DE CLASES
 Este diagrama de secuencia muestra la interacción entre: `Main`, `Controller`, `Model`, `ObserverVelocidad`,`ObserverLimite`, y `View`. 
 
 La secuencia de eventos comienza con la inicialización del modelo y la creación del controlador en la clase `Main`. 
@@ -61,47 +64,54 @@ sequenceDiagram
     ObserverLimite->Model: bajarVelocidad("JFK 9876", 10)
 ```
 
-## NUEVO DIAGRAMA DE CLASES
-
+### NUEVO DIAGRAMA DE CLASES
 ```mermaid
 classDiagram
-    Main
-      - main(String[] args)
-      - Model miModel
-      - Controller miController
-    
-    Controller
-      - Model miModel
-      - ObserverVelocidad observoVelocidad
-      - ObserverLimite observoLimite
-      - crearCoche(String, String)
-      - subirVelocidad(String, Integer)
-      - bajarVelocidad(String, Integer)
-    
-    Model
-      - getInstance()
-      - crearCoche(String, String, Integer)
-      - subirVelocidad(String, Integer)
-      - bajarVelocidad(String, Integer)
-      - addObserver(Observer)
-      - notifyObservers()
-    
-    Observer
-      - update(Coche, Model)
-    
-    ObserverVelocidad
-      - update(Coche, Model)
-      - View
-    
-    ObserverLimite
-      - update(Coche, Model)
-      - Model
-    
-    View
-      - muestraVelocidad(String, Integer)
-    
-    Coche
-      - String matricula
-      - String nombre
-      - Integer velocidad
+  class Main {
+    - main(String[] args)
+    - Model miModel
+    - Controller miController
+  }
+
+  class Controller {
+    - Model miModel
+    - ObserverVelocidad observoVelocidad
+    - ObserverLimite observoLimite
+    + crearCoche(String, String)
+    + subirVelocidad(String, Integer)
+    + bajarVelocidad(String, Integer)
+  }
+
+  class Model {
+    + getInstance()
+    + crearCoche(String, String, Integer)
+    + subirVelocidad(String, Integer)
+    + bajarVelocidad(String, Integer)
+    + addObserver(Observer)
+    + notifyObservers()
+  }
+
+  class Observer {
+    + update(Coche, Model)
+  }
+
+  class ObserverVelocidad {
+    + update(Coche, Model)
+    - View view
+  }
+
+  class ObserverLimite {
+    + update(Coche, Model)
+    - Model model
+  }
+
+  class View {
+    + muestraVelocidad(String, Integer)
+  }
+
+  class Coche {
+    - String matricula
+    - String nombre
+    - Integer velocidad
+  }
 ```
