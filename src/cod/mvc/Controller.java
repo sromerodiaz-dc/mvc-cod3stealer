@@ -48,6 +48,6 @@ public class Controller{
      * @param velocidad nueva
      */
     public void bajarVelocidad(String matricula, Integer velocidad){
-        miModel.subirVelocidad(matricula, velocidad);
+        miModel.bajarVelocidad(matricula, velocidad);
     }
 }
